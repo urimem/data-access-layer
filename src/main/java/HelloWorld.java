@@ -9,10 +9,10 @@ import com.mongodb.MongoClientOptions;
 import java.util.Arrays;
 
 public class HelloWorld {
-    public static void main(String[] args) {    
+    public static void main(String[] args) {
         System.out.println("Hello World");
 
-        MongoClient mongoClient = MongoClients.create("mongodb+srv://ogre:ws342edW@cluster0.o7p2u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+        MongoClient mongoClient = MongoClients.create("mongodb+srv://<username>:<password>@cluster0.o7p2u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
 
     }
 }
