@@ -21,21 +21,13 @@ public class HelloWorld {
     private Properties prop;
 
     public static void main(String[] args) {
-        System.out.println("Hello World");
-
         Properties prop = new Properties();
         try {
             // load a properties file for reading
             prop.load(new FileInputStream("local.properties"));
-            // get the properties and print
-            prop.list(System.out);
-            //Reading each property value
-            //System.out.println(prop.getProperty("FileName"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-        System.out.println(prop.getProperty("mongo.connectionString"));
 
         MongoClient mongoClient = MongoClients.create(prop.getProperty("mongo.connectionString"));
         MongoDatabase database = mongoClient.getDatabase(prop.getProperty("mongo.dbname"));
