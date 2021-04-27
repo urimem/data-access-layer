@@ -77,3 +77,4 @@ target/*
 
 web-crawler.log
 *.properties
+*.log
