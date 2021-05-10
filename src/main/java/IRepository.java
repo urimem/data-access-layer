@@ -1,5 +1,4 @@
-// Repository for a specific entity usually representing a table or collection
-// TEntity should have TKey
+// Repository representing specific entity corresponds to a table or collection
 public interface IRepository<TQueryFilter, TEntity> {
     void add(TEntity entity);
     void add(Iterable<TEntity> entities);

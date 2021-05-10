@@ -18,13 +18,16 @@ public class HelloMongo {
     public static final Logger LOGGER = Logger.getLogger(HelloMongo.class.getName());
 
     public static void main(String[] args) {
+        // Set logging and properties
         setup();
 
         LOGGER.info("-------------- start --------------");
-        // Use only one instance of MongoClient
+        // Use only one instance of MongoClient in the service
         MongoClient mongoClient = MongoClients.create(prop.getProperty("mongo.connectionString"));
+        // Create Repository for the movies collection
         MongoRepository movieRepository = new MongoRepository(mongoClient, prop.getProperty("mongo.dbname"), prop.getProperty("mongo.collectionName"));
 
+        // Query for titles containing the string "black"
         Document regQuery = new Document();
         regQuery.append("$regex", Pattern.quote("black")); //"^(?)" + Pattern.quote("black")); starts with
         regQuery.append("$options", "i");
@@ -34,6 +37,7 @@ public class HelloMongo {
 
         Iterable<Document> results = movieRepository.get(findQuery);
         for (Document movie : results) {
+            // TODO: print only title
             System.out.println("---------- movie ----------");
             System.out.println(movie.toJson());
         }
