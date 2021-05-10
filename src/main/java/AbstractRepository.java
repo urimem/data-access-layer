@@ -20,7 +20,7 @@ public abstract class AbstractRepository<TQueryFilter, TEntity> implements IRepo
     }
 
     @Override
-    public int count() {
+    public long count() {
         return 0;
     }
 

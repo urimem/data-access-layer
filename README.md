@@ -1,6 +1,10 @@
 Data Access Layer implementation.
-Using Repository design pattern (https://martinfowler.com/eaaCatalog/repository.html)
-Using Java Logger with file handler
 
-Using MongoDB with Atlas Sample data as data-source.
+- Maven project.  java -cp target/Mongodb-test-1.0-SNAPSHOT.jar HelloMongo
+- Repository design pattern (https://martinfowler.com/eaaCatalog/repository.html)
+- Data source: MongoDB Atlas Sample DB
+- Java Logger + file handler
+
+
+
 

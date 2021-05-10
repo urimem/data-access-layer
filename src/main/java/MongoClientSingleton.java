@@ -11,7 +11,7 @@ public class MongoClientSingleton {
         if (client == null) {
             synchronized (MongoClientSingleton.class) {
                 if (client == null)
-                    client = MongoClients.create(HelloWorld.prop.getProperty("mongo.connectionString"));
+                    client = MongoClients.create(HelloMongo.prop.getProperty("mongo.connectionString"));
             }
         }
         return client;
