@@ -3,6 +3,8 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import com.mongodb.client.MongoClient;
 
+import java.util.List;
+
 public class MongoRepository implements IRepository<Document, Document> {
 
     private String dbName;
@@ -38,18 +40,19 @@ public class MongoRepository implements IRepository<Document, Document> {
     }
     @Override
     public void add(Document document) {
-
+        initCollection();
+        collection.insertOne(document);
     }
 
     @Override
     public void add(Iterable<Document> documents) {
-
+        initCollection();
+        collection.insertMany((List<? extends Document>) documents);
     }
 
     @Override
     public Iterable<Document> get(Document document) {
         initCollection();
-        //collection
         return collection.find(document);
     }
 
