@@ -68,17 +68,12 @@ public class MongoRepository implements IRepository<Document, Document> {
     }
 
     @Override
-    public void update(Document document) {
-
-    }
-
-    @Override
-    public void update(Iterable<Document> documents) {
-
+    public void update(Document queryFilter, Document document) {
+        initCollection();
+        collection.updateMany(queryFilter, document);
     }
 
     @Override
     public void delete(Document document) {
-
     }
 }

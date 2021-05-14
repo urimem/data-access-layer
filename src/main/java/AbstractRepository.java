@@ -25,13 +25,7 @@ public abstract class AbstractRepository<TQueryFilter, TEntity> implements IRepo
     }
 
     @Override
-    public void update(TEntity entity) {
-
-    }
-
-    @Override
-    public void update(Iterable<TEntity> entities) {
-
+    public void update(TQueryFilter queryFilter,TEntity entity) {
     }
 
     @Override
