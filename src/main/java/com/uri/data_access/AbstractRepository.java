@@ -1,3 +1,5 @@
+package com.uri.data_access;
+
 public abstract class AbstractRepository<TQueryFilter, TEntity> implements IRepository<TQueryFilter, TEntity> {
     @Override
     public void add(TEntity entity) {

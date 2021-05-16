@@ -1,3 +1,5 @@
+package com.uri.data_access;
+
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 

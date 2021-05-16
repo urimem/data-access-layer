@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoClient;
+import com.uri.data_access.MongoRepository;
 import org.bson.Document;
 
 import java.util.logging.FileHandler;

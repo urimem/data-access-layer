@@ -1,3 +1,5 @@
+package com.uri.data_access;
+
 // Repository representing specific entity corresponds to a table or collection
 public interface IRepository<TQueryFilter, TEntity> {
     void add(TEntity entity);
