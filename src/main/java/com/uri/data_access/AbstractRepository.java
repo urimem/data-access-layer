@@ -31,7 +31,7 @@ public abstract class AbstractRepository<TQueryFilter, TEntity> implements IRepo
     }
 
     @Override
-    public void delete(TQueryFilter queryFilter) {
-
+    public long delete(TQueryFilter queryFilter) {
+        return 0;
     }
 }

@@ -8,5 +8,5 @@ public interface IRepository<TQueryFilter, TEntity> {
     Iterable<TEntity> getAll();
     long count();
     void update(TQueryFilter queryFilter, TEntity entity);
-    void delete(TQueryFilter queryFilter); // return count?
+    long delete(TQueryFilter queryFilter); // return count?
 }

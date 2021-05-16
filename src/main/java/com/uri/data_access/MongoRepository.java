@@ -7,6 +7,7 @@ import com.mongodb.client.MongoClient;
 
 import java.util.List;
 
+// Not in use - Does not allow dependency injection
 public class MongoRepository implements IRepository<Document, Document> {
 
     private String dbName;
@@ -76,6 +77,9 @@ public class MongoRepository implements IRepository<Document, Document> {
     }
 
     @Override
-    public void delete(Document document) {
+    public long delete(Document document) {
+        initCollection();
+        var result = collection.deleteMany(document);
+        return result.getDeletedCount();
     }
 }
