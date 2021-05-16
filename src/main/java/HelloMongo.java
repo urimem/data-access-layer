@@ -22,7 +22,8 @@ public class HelloMongo {
         // Set logging and properties
         setup();
 
-        LOGGER.info("-------------- start --------------");
+        LOGGER.info("------- HelloMongo.main start --------");
+        /*
         // Use only one instance of MongoClient in the service
         MongoClient mongoClient = MongoClients.create(prop.getProperty("mongo.connectionString"));
         // Create Repository for the movies collection
@@ -48,6 +49,7 @@ public class HelloMongo {
         //System.out.println("No' of docs in this collection: " + collection.countDocuments());
 
         mongoClient.close();
+        */
     }
 
     public static void setup() {

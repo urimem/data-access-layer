@@ -2,20 +2,27 @@ package com.uri.data_access;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
+import org.bson.types.ObjectId;
+import org.junit.jupiter.api.*;
+
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.FileInputStream;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class MongoRepositoryTest {
 
+    // application configuration
     Properties properties;
+    // Mongo client object - keeping reference to close connecion.
     MongoClient mongoClient;
+    // Tested class/code
     MongoRepository movieRepository;
 
     @BeforeAll
@@ -38,18 +45,59 @@ class MongoRepositoryTest {
     }
 
     @Test
-    void add() {
+    @Order(1)
+    void find() {
+        // Query for titles containing the string "black" - should have 127
+        Document regQuery = new Document();
+        regQuery.append("$regex", Pattern.quote("black")); //"^(?)" + Pattern.quote("black")); starts with
+        regQuery.append("$options", "i");
+
+        Document findQuery = new Document();
+        findQuery.append("title", regQuery);
+
+        Iterable<Document> results = movieRepository.get(findQuery);
+        var ref = new Object() {
+            long count = 0;
+        };
+        results.forEach((d) -> {
+            ref.count++;});
+
+        // Should contain xxx docs with title containing "black"
+        assertEquals(127, ref.count);
+    }
+
+    private Document getTestMovie1() {
+        Document newMovieDoc = new Document("_id", new ObjectId());
+        newMovieDoc.append("title", "The blind swordsman")
+                .append("plot", "Zatoichi the blind swordsman fight the unjustice.")
+                .append("year", 1966)
+                .append("type", "movie");
+        //        .append("genres", asList("Action","Drama"));
+        return newMovieDoc;
     }
 
     @Test
-    void get() {
+    @Order(2)
+    // add movie and find it by title
+    void addAndGet() {
+        movieRepository.add(getTestMovie1());
+
+        Iterable<Document> results = movieRepository.get(new Document("title", "The blind swordsman"));
+        var resultDoc = results.iterator().next();
+        if (resultDoc == null) {
+            assert(false);
+        }
+        else {
+            int year = (int)resultDoc.get("year");
+            assertEquals(year, 1966);
+        }
     }
 
     @Test
-    void count() {
-    }
-
-    @Test
+    @Order(3)
+    // Delete the movie added in prev test
     void delete() {
+        long count = movieRepository.delete(new Document("title", "The blind swordsman"));
+        assertEquals(count, 1);
     }
 }
