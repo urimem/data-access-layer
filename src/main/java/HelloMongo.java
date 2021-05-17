@@ -23,6 +23,7 @@ public class HelloMongo {
         setup();
 
         LOGGER.info("------- HelloMongo.main start --------");
+
         /*
         // Use only one instance of MongoClient in the service
         MongoClient mongoClient = MongoClients.create(prop.getProperty("mongo.connectionString"));
